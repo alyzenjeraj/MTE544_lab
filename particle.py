@@ -18,9 +18,24 @@ class particle:
         w: angular velocity
         dt: time step
         """
-        self.pose[0] += ...
-        self.pose[1] += ...
-        self.pose[2] += ...
+        theta = self.pose[2]
+
+        # 0 vel tolernace
+        eps = 1e-6
+        if abs(w) < eps:
+            # stright line
+            dx = v * cos(theta) * dt
+            dy = v * sin(theta) * dt
+        else:
+            dx = (v / w) * (sin(theta + w * dt) - sin(theta))
+            dy = (v / w) * (-cos(theta + w * dt) + cos(theta))
+
+        self.pose[0] = self.pose[0] + dx
+        self.pose[1] = self.pose[1] + dy
+        self.pose[2] = self.pose[2] + w * dt
+
+        # normalize
+        self.pose[2] = (self.pose[2] + np.pi) % (2 * np.pi) - np.pi
 
     # TODO: You need to explain the following function to TA
     def calculateParticleWeight(self, scanOutput: LaserScan, mapManipulatorInstance: mapManipulator, laser_to_ego_transformation: np.array):
