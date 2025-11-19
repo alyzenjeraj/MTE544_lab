@@ -114,7 +114,7 @@ To fix your particle filter, you will need to:
 - Complete the initialization and resampling for the particle filter algorithm; follow the comments in ```particleFilter.py```.
 
 In the lab, you will need to run the particle filter standalone to see the particles converging to the robot pose.
-- Place the robot in the map where you run the SLAM and reset the odometry.
+- Place the robot in the map where you run the SLAM and reset the odometry..
 - Run the following commands:
   ```
   # terminal 1
