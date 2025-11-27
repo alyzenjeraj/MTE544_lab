@@ -84,6 +84,7 @@ class decision_maker(Node):
             return
         
         
+        self.get_logger().info("Received Pose")
         self.goal=self.planner.plan([self.localizer.getPose()[0], self.localizer.getPose()[1]],
                                      [msg.pose.position.x, msg.pose.position.y])
 
@@ -91,6 +92,7 @@ class decision_maker(Node):
     def timerCallback(self):
         
         if self.goal is None:
+            self.get_logger().info("Goal not received")
             return
 
         spin_once(self.localizer)
